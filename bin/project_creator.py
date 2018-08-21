@@ -13,7 +13,7 @@ logging.basicConfig(format="%(asctime)s %(levelname)s %(filename)s %(lineno)d %(
 logger = logging.getLogger(__name__)
 
 
-def run_command(self, command):
+def run_command(command):
     """Run command using subprocess module."""
     try:
         logger.debug("Running: {}".format(command))
