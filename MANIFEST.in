@@ -1,0 +1,9 @@
+graft *
+prune .hg
+prune .hgignore
+prune .ropeproject
+prune .git
+prune .gitignore
+include LICENSE
+include README.md
+recursive-include project_creator/assets *
