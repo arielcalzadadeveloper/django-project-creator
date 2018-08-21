@@ -16,9 +16,12 @@ def main():
     parser = argparse.ArgumentParser(description="Creates a Django Project")
     parser.add_argument('location', help='Location for the new project, this must not exist.')
 
-    args = parser.parse_args(sys.argv[1:])
-    if os.path.exists(args.location):
-        raise Exception("The location already exists")
+    try:
+        args = parser.parse_args(sys.argv[1:])
+        if os.path.exists(args.location):
+            raise Exception("The location already exists")
+    except Exception as e:
+        raise Exception(e)
 
 
 if __name__ == "__main__":
