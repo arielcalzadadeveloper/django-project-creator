@@ -56,21 +56,7 @@ class TestProjectCreator(unittest.TestCase):
 
         return python_executable, path, project_creator_path
 
-    def test_no_location(self):
-        """No location provided."""
-        python_executable, virtualenv_path, project_creator_path = self._create_virtualenv()
-
-        command = [
-            python_executable,
-            project_creator_path
-        ]
-
-        self.assertRaises(Exception, self._run_command(command))
-
-    def test_invalid_location(self):
-        """Invalid location."""
-        python_executable, virtualenv_path, project_creator_path = self._create_virtualenv()
-
     def test_valid_location(self):
         """Valid location."""
         python_executable, virtualenv_path, project_creator_path = self._create_virtualenv()
+
