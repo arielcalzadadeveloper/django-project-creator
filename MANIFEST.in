@@ -6,4 +6,4 @@ prune .git
 prune .gitignore
 include LICENSE
 include README.md
-recursive-include project_creator/assets *
+prune tests.py
