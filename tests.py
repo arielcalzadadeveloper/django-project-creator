@@ -75,4 +75,7 @@ class TestProjectCreator(unittest.TestCase):
     def test_valid_location(self):
         """Valid location."""
         python_executable, virtualenv_path, project_creator_path = self._create_virtualenv()
-
+        name = uuid.uuid4().hex
+        path = os.path(self.temporal_directory, name)
+        command = [python_executable, project_creator_path, path]
+        self._run_command(command)
