@@ -44,6 +44,12 @@ class TestProjectCreator(unittest.TestCase):
 
         return path
 
+    def _install_package(self, path):
+        python_executable = os.path.join(path, "bin", "python")
+        pip_executable = os.path.join(path, "bin", "pip")
+        command = [pip_executable, "install", "git+https://github.com/arielcalzadadeveloper/django-project-creator.git"]
+        self._run_command(command)
+
     def test_no_location(self):
         """No location provided."""
         pass
@@ -55,7 +61,4 @@ class TestProjectCreator(unittest.TestCase):
     def test_valid_location(self):
         """Valid location."""
         path = self._create_virtualenv()
-        python_executable = os.path.join(path, "bin", "python")
-        pip_executable = os.path.join(path, "bin", "pip")
-        command = [pip_executable, "install", "git+https://github.com/arielcalzadadeveloper/django-project-creator.git"]
-        self._run_command(command)
+        self._install_package(path)
