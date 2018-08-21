@@ -8,7 +8,7 @@ import sys
 
 logging.basicConfig(format="%(asctime)s %(levelname)s %(filename)s %(lineno)d %(funcName)s %(message)s",
                     handlers=[logging.StreamHandler()],
-                    level=logging.DEBUG)
+                    level=logging.DEBUG if os.getenv("DJANGO_PROJECT_CREATOR_DEBUG", "False") == "True" else logging.INFO)
 
 logger = logging.getLogger(__name__)
 
@@ -40,6 +40,7 @@ def main():
         "conf",
         args.location
     ]
+    logger.info("Creating project...")
     run_command(command)
 
 
