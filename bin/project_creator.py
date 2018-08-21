@@ -31,8 +31,8 @@ def main():
     parser.add_argument('location', help='Location for the new project, this must not exist.')
 
     args = parser.parse_args(sys.argv[1:])
-    if os.path.exists(args.location):
-        raise Exception("The location already exists")
+    if not os.path.exists(args.location):
+        os.makedirs(args.location)
 
     command = [
         "django-admin",

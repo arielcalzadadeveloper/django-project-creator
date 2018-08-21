@@ -62,16 +62,6 @@ class TestProjectCreator(unittest.TestCase):
         command = [python_executable, project_creator_path]
         self.assertRaises(Exception, self._run_command, command)
 
-    def test_invalid_location(self):
-        """Existing location."""
-        python_executable, virtualenv_path, project_creator_path = self._create_virtualenv()
-
-        path = os.path.join(virtualenv_path, "test_invalid_location")
-        os.mkdir(path)
-        command = [python_executable, project_creator_path, path]
-        self.assertRaises(Exception, self._run_command, command)
-        shutil.rmtree(path)
-
     def test_valid_location(self):
         """Valid location."""
         python_executable, virtualenv_path, project_creator_path = self._create_virtualenv()
