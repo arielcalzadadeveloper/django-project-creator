@@ -48,19 +48,26 @@ class ProjectCreator:
 
     def _get_base_project(self, location):
         logger.info("Cloning base project")
-        # temporal_location = os.path.join(location, uuid.uuid4().hex)
+        temporal_location = os.path.join(location, uuid.uuid4().hex)
 
         command = [
             "git",
             "clone",
             self.BASE_PROJECT_URL,
-            location
+            temporal_location
         ]
 
         self._run_command(command)
 
-        # shutil.copytree(temporal_location, location)
-        # shutil.rmtree(temporal_directory)
+        command = [
+            "mv",
+            "-f",
+            os.path.join(temporal_location, "/"),
+            location
+        ]
+
+        self._run_command(command)
+        shutil.rmtree(temporal_location)
 
 
 def main():
