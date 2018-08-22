@@ -192,12 +192,8 @@ class ProjectCreator:
         contents = contents.replace(old_string, new_string)
 
         old_string = "WSGI_APPLICATION = 'conf.wsgi.application'"
-        new_builtins = """
-        TEMPLATES[0]["OPTIONS"]["builtins"] = [
-            'django.templatetags.static',
-            'crispy_forms.templatetags.crispy_forms_tags',
-        ]
-        """
+        new_builtins_list = "['django.templatetags.static', 'crispy_forms.templatetags.crispy_forms_tags']"
+        new_builtins = """TEMPLATES[0]["OPTIONS"]["builtins"] = {}""".format(new_builtins_list)
         new_string = "{}\n\n{}".format(new_builtins, old_string)
         contents = contents.replace(old_string, new_string)
 
