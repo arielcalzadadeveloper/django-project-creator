@@ -3,8 +3,11 @@
 import argparse
 import logging
 import os
+import shutil
 import subprocess
 import sys
+import tempfile
+import uuid
 
 logging.basicConfig(format="%(asctime)s %(levelname)s %(filename)s %(lineno)d %(funcName)s %(message)s",
                     handlers=[logging.StreamHandler()],
@@ -45,14 +48,19 @@ class ProjectCreator:
 
     def _get_base_project(self, location):
         logger.info("Cloning base project")
+        temporal_location = os.path.join(location, uuid.uuid4().hex)
+
         command = [
             "git",
             "clone",
             self.BASE_PROJECT_URL,
-            location
+            temporal_location
         ]
 
         self._run_command(command)
+
+        # shutil.copytree(temporal_location, location)
+        # shutil.rmtree(temporal_directory)
 
 
 def main():
