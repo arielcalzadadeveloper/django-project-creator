@@ -207,7 +207,7 @@ class ProjectCreator:
 
         # All auth
         old_string = "# Database"
-        allauth_options = """
+        allauth_options = """# All auth
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
 LOGIN_REDIRECT_URL = reverse_lazy("home")
 ACCOUNT_ADAPTER = "applications.users.account_adapter.AccountAdapter"
