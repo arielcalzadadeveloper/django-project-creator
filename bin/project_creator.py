@@ -152,6 +152,11 @@ class ProjectCreator:
         with open(path, "r") as fh:
             contents = fh.read()
 
+        # Site ID
+        old_string = "ROOT_URLCONF = 'conf.urls'"
+        new_string = "SITE_ID = 1"
+        contents = contents.replace(old_string, "{}\n\n{}".format(old_string, new_string))
+
         # Import
         old_string = "import os"
         new_string = ["from django.urls import reverse_lazy",
