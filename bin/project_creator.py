@@ -127,6 +127,7 @@ class ProjectCreator:
         new_patterns = [
             "    url(r'^accounts/', include('allauth.urls')),",
             "    url(r'^admin/dynamic_raw_id/', include('dynamic_raw_id.urls')),",
+            "    url(r'^users/', include('applications.users.urls'), name='users'),",
             "    url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),",
         ]
         old_string = "    path('admin/', admin.site.urls),"
