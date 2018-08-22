@@ -182,7 +182,7 @@ class ProjectCreator:
             '',
             "'applications.last_app',",
         ]
-        old_string = "'django.contrib.staticfiles'"
+        old_string = "'django.contrib.staticfiles',"
         new_string = "{}\n\n    {}".format(old_string, "\n    ".join(new_applications))
         contents = contents.replace(old_string, new_string)
 
