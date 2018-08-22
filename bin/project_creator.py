@@ -200,7 +200,7 @@ class ProjectCreator:
         # Authentication backends
         old_string = "WSGI_APPLICATION = 'conf.wsgi.application'"
         backends = "'django.contrib.auth.backends.ModelBackend',"
-        backends += "\n{}'allauth.account.auth_backends.AuthenticationBackend'".format(" " * 28)
+        backends += "\n{}'allauth.account.auth_backends.AuthenticationBackend'".format(" " * 27)
         auth_backends = """AUTHENTICATION_BACKENDS = ({},)""".format(backends)
         new_string = "{}\n\n{}".format(old_string, auth_backends)
         contents = contents.replace(old_string, new_string)
