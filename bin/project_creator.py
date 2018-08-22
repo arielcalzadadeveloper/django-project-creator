@@ -114,6 +114,7 @@ class ProjectCreator:
         # Add django imports
         new_imports = [
             "from django.conf import settings",
+            "from django.conf.urls.static import static",
         ]
         old_string = "from django.urls import path"
         new_string = "{}\n{}".format(old_string, "\n".join(new_imports))
