@@ -251,7 +251,7 @@ ACCOUNT_USERNAME_VALIDATORS = None
         # Database
         old_string = """'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),"""
         new_string = """'ENGINE': os.getenv("DB_ENGINE"),
-        'NAME': os.getenv("DB_NAME"),
+        'NAME': os.path.join(BASE_DIR, 'db', os.getenv("DB_NAME")) if 'sqlite3' in os.getenv("DB_ENGINE") else os.getenv("DB_NAME"),
         'USER': os.getenv("DB_USER"),
         'PASSWORD': os.getenv("DB_PASSWORD"),
         'HOST': os.getenv("DB_HOST"),
