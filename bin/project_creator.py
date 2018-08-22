@@ -157,7 +157,7 @@ class ProjectCreator:
 
         # DEBUG
         old_string = "DEBUG = True"
-        new_string = "{}\nTrue if os.getenv('DEBUG') == 'True' else False".format(old_string)
+        new_string = "DEBUG = True if os.getenv('DEBUG') == 'True' else False".format(old_string)
         contents = contents.replace(old_string, new_string)
 
         # Allowed hosts
