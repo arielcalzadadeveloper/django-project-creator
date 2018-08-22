@@ -177,6 +177,7 @@ class ProjectCreator:
             '',
             "'applications.common',",
             "'applications.users',",
+            "'applications.home',",
             '',
             "'allauth',",
             "'allauth.account',",
