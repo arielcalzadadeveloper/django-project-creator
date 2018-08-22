@@ -249,7 +249,7 @@ ACCOUNT_USERNAME_VALIDATORS = None
         contents = contents.replace(old_string, new_string)
 
         # Database
-        old_string = """    'default': {"""
+        old_string = """'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),"""
         new_string = """        'ENGINE': os.getenv("DB_ENGINE"),
         'NAME': os.getenv("DB_NAME"),
         'USER': os.getenv("DB_USER"),
@@ -258,6 +258,10 @@ ACCOUNT_USERNAME_VALIDATORS = None
         'PORT': os.getenv("DB_PORT"),
         """
         new_string = "{}\n{}".format(old_string, new_string)
+        contents = contents.replace(old_string, new_string)
+
+        old_string = """'ENGINE': 'django.db.backends.sqlite3',"""
+        new_string = ""
         contents = contents.replace(old_string, new_string)
 
         with open(path, "w") as fh:
