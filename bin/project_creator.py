@@ -71,12 +71,13 @@ class ProjectCreator:
 
         self._run_command(command, False)
 
-        command = [
-            "mv",
-            "-f",
-            "{}/.*".format(temporal_location),
-            location
-        ]
+        for file_name in [".yarnrc", ".gitignore"]:
+            command = [
+                "mv",
+                "-f",
+                "{}/{}".format(temporal_location, file_name),
+                location
+            ]
 
         self._run_command(command, False)
 
