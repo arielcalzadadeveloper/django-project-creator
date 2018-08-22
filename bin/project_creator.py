@@ -186,6 +186,11 @@ class ProjectCreator:
         new_string = "{}\n\n    {}".format(old_string, "\n    ".join(new_applications))
         contents = contents.replace(old_string, new_string)
 
+        # Templates
+        old_string = "'django.contrib.messages.context_processors.messages',"
+        new_string = "{}\n\n{}{}".format(old_string, "    " * 4, "'applications.common.context_processors.general',")
+        contents = contents.replace(old_string, new_string)
+
         with open(path, "w") as fh:
             fh.write(contents)
 
