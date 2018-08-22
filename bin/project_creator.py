@@ -313,7 +313,7 @@ BROWSER_WINDOW_TITLE = "Base project"
         contents = contents.replace(old_string, new_string)
 
         old_string = "os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'conf.settings')"
-        new_string = "dotenv.read_dotenv()\n\n    {}\n".format(old_string)
+        new_string = "dotenv.read_dotenv()\n    {}\n".format(old_string)
         contents = contents.replace(old_string, new_string)
 
         with open(path, "w") as fh:
