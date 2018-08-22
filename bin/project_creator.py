@@ -155,6 +155,12 @@ class ProjectCreator:
         with open(path, "r") as fh:
             contents = fh.read()
 
+        # Import
+        old_string = "import os"
+        new_string = ["from django.urls import reverse_lazy",
+                      "from django.contrib.messages import constants as message_constants"]
+        contents = contents.replace(old_string, "{}\n\n{}".format(old_string, "\n".join(new_string)))
+
         # DEBUG
         old_string = "DEBUG = True"
         new_string = "DEBUG = True if os.getenv('DEBUG') == 'True' else False".format(old_string)
