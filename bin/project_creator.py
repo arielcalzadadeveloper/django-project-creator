@@ -70,6 +70,16 @@ class ProjectCreator:
         ]
 
         self._run_command(command, False)
+
+        command = [
+            "mv",
+            "-f",
+            "{}/.*".format(temporal_location),
+            location
+        ]
+
+        self._run_command(command, False)
+
         shutil.rmtree(temporal_location)
 
 
