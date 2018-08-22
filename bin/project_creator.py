@@ -197,6 +197,13 @@ class ProjectCreator:
         new_string = "{}\n\n{}".format(new_builtins, old_string)
         contents = contents.replace(old_string, new_string)
 
+        # Authentication backends
+        old_string = "WSGI_APPLICATION = 'conf.wsgi.application'"
+        backends = "'django.contrib.auth.backends.ModelBackend', 'allauth.account.auth_backends.AuthenticationBackend'"
+        auth_backends = """AUTHENTICATION_BACKENDS = ({},)""".format(backends)
+        new_string = "{}\n\n{}".format(old_string, auth_backends)
+        contents = contents.replace(old_string, new_string)
+
         with open(path, "w") as fh:
             fh.write(contents)
 
