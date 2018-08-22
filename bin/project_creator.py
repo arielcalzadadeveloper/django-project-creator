@@ -270,6 +270,28 @@ ACCOUNT_USERNAME_VALIDATORS = None
         new_string = """TIME_ZONE = 'America/Bogota'"""
         contents = contents.replace(old_string, new_string)
 
+        # Static/Media files
+        old_string = "STATIC_URL = '/static/'"
+        new_string = """STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+STATIC_URL = "/base_project_static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "static_root")
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/base_project_media/"""
+        contents = contents.replace(old_string, new_string)
+
+        # Last sections
+        contents += """
+# Allow thousand separator
+USE_THOUSAND_SEPARATOR = True
+
+# Crispy forms
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+CRISPY_FAIL_SILENTLY = not DEBUG
+
+# Browser window title
+BROWSER_WINDOW_TITLE = "Base project"
+"""
         with open(path, "w") as fh:
             fh.write(contents)
 
