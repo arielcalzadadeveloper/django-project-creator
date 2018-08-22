@@ -123,15 +123,6 @@ class ProjectCreator:
         new_string = "{}\n{}".format(old_string, "\n".join(new_imports))
         contents = contents.replace(old_string, new_string)
 
-        # Add imports
-        new_imports = [
-            "import allauth",
-            "import dynamic_raw_id",
-        ]
-        old_string = "from django.conf import settings"
-        new_string = "{}\n\n{}".format(old_string, "\n".join(new_imports))
-        contents = contents.replace(old_string, new_string)
-
         # Add patterns
         new_patterns = [
             "    url(r'^accounts/', include('allauth.urls')),,",
