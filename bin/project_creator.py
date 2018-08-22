@@ -25,9 +25,10 @@ class ProjectCreator:
     @staticmethod
     def _run_command(command, with_subprocess=True):
         """Run shell command"""
+        logger.debug("Running: {}".format(command))
+
         if with_subprocess:
             try:
-                logger.debug("Running: {}".format(command))
                 command_line_process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 process_output, _ = command_line_process.communicate()
 
