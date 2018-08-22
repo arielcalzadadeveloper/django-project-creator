@@ -14,6 +14,7 @@ class ProjectCreator:
     def create(self, location):
         self._create_project(location)
         self._get_base_project(location)
+        self._setup_environment_file(location)
 
     @staticmethod
     def _run_command(command, with_subprocess=True):
@@ -74,6 +75,13 @@ class ProjectCreator:
             self._run_command(command, False)
 
         shutil.rmtree(temporal_location)
+
+    def _setup_environment_file(self, location):
+        # Rename example file
+        source = os.path.join(location, "env.example")
+        target = os.path.join(location, ".env")
+        command = ["mv", "-f", source, target]
+        self._run_command(command, False)
 
 
 def main():
