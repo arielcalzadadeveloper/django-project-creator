@@ -113,7 +113,10 @@ class ProjectCreator:
 
         # Add django imports
         new_imports = [
+            "from django.conf.urls import include",
+            "from django.conf.urls import url",
             "from django.conf.urls.static import static",
+            "from django.views.generic import TemplateView",
             "from django.conf import settings",
         ]
         old_string = "from django.urls import path"
@@ -131,8 +134,9 @@ class ProjectCreator:
 
         # Add patterns
         new_patterns = [
-            "    path('accounts/', allauth.urls),",
-            "    path('admin/dynamic_raw_id/', dynamic_raw_id.urls),",
+            "     url(r'^accounts/', include('allauth.urls')),,",
+            "     url(r'^admin/dynamic_raw_id/', include('dynamic_raw_id.urls')),",
+            "     url(r'^$', TemplateView.as_view(template_name=home_template), name='home'),",
         ]
         old_string = "    path('admin/', admin.site.urls),"
         new_string = "{}\n\n{}".format(old_string, "\n".join(new_patterns))
