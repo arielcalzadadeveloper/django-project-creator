@@ -17,6 +17,7 @@ class ProjectCreator:
         self._setup_environment_file(location)
         self._modify_wsgi_file(location)
         self._modify_urls_file(location)
+        self._modify_settings_file(location)
 
     @staticmethod
     def _run_command(command, with_subprocess=True):
@@ -144,6 +145,46 @@ class ProjectCreator:
         contents += "\n\n"
         contents += "admin.site.site_header = 'Base Project'\n"
         contents += "admin.site.index_header = 'Base Project'"
+
+        with open(path, "w") as fh:
+            fh.write(contents)
+
+    def _modify_settings_file(self, location):
+        path = os.path.join(location, "conf", "settings.py")
+
+        with open(path, "r") as fh:
+            contents = fh.read()
+
+        # DEBUG
+        old_string = "DEBUG = True"
+        new_string = "{}\nTrue if os.getenv('DEBUG') == 'True' else False".format(old_string)
+        contents = contents.replace(old_string, new_string)
+
+        # Allowed hosts
+        old_string = "ALLOWED_HOSTS = []"
+        new_string = "{}\nos.getenv('ALLOWED_HOSTS').split(',')".format(old_string)
+        contents = contents.replace(old_string, new_string)
+
+        # Installed apps
+        new_applications = [
+            'django.contrib.sites',
+            'django.contrib.humanize',
+            '',
+            'crispy_forms',
+            '',
+            'applications.common',
+            'applications.users',
+            '',
+            'allauth',
+            'allauth.account',
+            'allauth.socialaccount',
+            'dynamic_raw_id',
+            '',
+            'applications.last_app',
+        ]
+        old_string = "'django.contrib.staticfiles'"
+        new_string = "{}\n\n{}".format(old_string, "\n    ".join(new_applications))
+        contents = contents.replace(old_string, new_string)
 
         with open(path, "w") as fh:
             fh.write(contents)
