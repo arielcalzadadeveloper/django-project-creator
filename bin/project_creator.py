@@ -23,17 +23,20 @@ class ProjectCreator:
         self._get_base_project(location)
 
     @staticmethod
-    def _run_command(command):
-        """Run command using subprocess module."""
-        try:
-            logger.debug("Running: {}".format(command))
-            command_line_process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            process_output, _ = command_line_process.communicate()
+    def _run_command(command, with_subprocess=True):
+        """Run shell command"""
+        if with_subprocess:
+            try:
+                logger.debug("Running: {}".format(command))
+                command_line_process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                process_output, _ = command_line_process.communicate()
 
-            if command_line_process.returncode != 0:
-                raise Exception(process_output)
-        except Exception as e:
-            raise Exception(e)
+                if command_line_process.returncode != 0:
+                    raise Exception(process_output)
+            except Exception as e:
+                raise Exception(e)
+        else:
+            os.system(" ".join(command))
 
     def _create_project(self, location):
         command = [
@@ -65,7 +68,7 @@ class ProjectCreator:
             location
         ]
 
-        self._run_command(command)
+        self._run_command(command, False)
         shutil.rmtree(temporal_location)
 
 
