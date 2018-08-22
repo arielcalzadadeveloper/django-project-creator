@@ -18,6 +18,7 @@ class ProjectCreator:
         self._modify_wsgi_file(location)
         self._modify_urls_file(location)
         self._modify_settings_file(location)
+        self._modify_manage_file(location)
 
     @staticmethod
     def _run_command(command, with_subprocess=True):
@@ -298,6 +299,23 @@ CRISPY_FAIL_SILENTLY = not DEBUG
 # Browser window title
 BROWSER_WINDOW_TITLE = "Base project"
 """
+        with open(path, "w") as fh:
+            fh.write(contents)
+
+    def _modify_manage_file(self, location):
+        path = os.path.join(location, "manage.py")
+
+        with open(path, "r") as fh:
+            contents = fh.read()
+
+        old_string = "import os"
+        new_string = "{}\n\nimport dotenv".format(old_string)
+        contents = contents.replace(old_string, new_string)
+
+        old_string = "os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'conf.settings')"
+        new_string = "dotenv.read_dotenv()\n\n{}".format(old_string)
+        contents = contents.replace(old_string, new_string)
+
         with open(path, "w") as fh:
             fh.write(contents)
 
