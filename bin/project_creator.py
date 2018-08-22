@@ -96,7 +96,7 @@ class ProjectCreator:
         contents = contents.replace(old_string, new_string)
 
         old_string = "from django.core.wsgi import get_wsgi_application"
-        new_string = "{}\ndotenv.read_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env'))".format(
+        new_string = "{}\n\ndotenv.read_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env'))".format(
             old_string)
         contents = contents.replace(old_string, new_string)
 
@@ -109,12 +109,20 @@ class ProjectCreator:
         with open(path, "r") as fh:
             contents = fh.read()
 
+        # Add django imports
+        new_imports = [
+            "from django.conf import settings",
+        ]
+        old_string = "from django.urls import path"
+        new_string = "{}\n{}".format(old_string, "\n".join(new_imports))
+        contents = contents.replace(old_string, new_string)
+
         # Add imports
         new_imports = [
             "import allauth",
             "import dynamic_raw_id",
         ]
-        old_string = "from django.urls import path"
+        old_string = "from django.conf import settings"
         new_string = "{}\n\n{}".format(old_string, "\n".join(new_imports))
         contents = contents.replace(old_string, new_string)
 
