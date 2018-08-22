@@ -120,8 +120,8 @@ class ProjectCreator:
 
         # Add patterns
         new_patterns = [
-            "path('accounts/', allauth.urls),",
-            "path('admin/dynamic_raw_id/', dynamic_raw_id.urls),",
+            "    path('accounts/', allauth.urls),",
+            "    path('admin/dynamic_raw_id/', dynamic_raw_id.urls),",
         ]
         old_string = "    path('admin/', admin.site.urls),"
         new_string = "{}\n\n{}".format(old_string, "\n".join(new_patterns))
@@ -133,7 +133,7 @@ class ProjectCreator:
         contents += "    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)"
 
         # Add admin titles
-        contents += "\n"
+        contents += "\n\n"
         contents += "admin.site.site_header = 'Base Project'\n"
         contents += "admin.site.index_header = 'Base Project'"
 
