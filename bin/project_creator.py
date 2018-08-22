@@ -71,7 +71,7 @@ class ProjectCreator:
                 location
             ]
 
-        self._run_command(command, False)
+            self._run_command(command, False)
 
         shutil.rmtree(temporal_location)
 
