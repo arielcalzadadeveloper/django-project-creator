@@ -125,7 +125,7 @@ class ProjectCreator:
 
         # Add patterns
         new_patterns = [
-            "    url(r'^accounts/', include('allauth.urls')),,",
+            "    url(r'^accounts/', include('allauth.urls')),",
             "    url(r'^admin/dynamic_raw_id/', include('dynamic_raw_id.urls')),",
             "    url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),",
         ]
