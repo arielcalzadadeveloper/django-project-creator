@@ -75,7 +75,7 @@ class ProjectCreator:
             command = [
                 "mv",
                 "-f",
-                "{}/{}".format(temporal_location, file_name),
+                os.path.join(temporal_location, file_name),
                 location
             ]
 
