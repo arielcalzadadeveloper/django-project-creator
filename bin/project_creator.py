@@ -10,7 +10,7 @@ import uuid
 
 logging.basicConfig(format="%(asctime)s %(levelname)s %(filename)s %(lineno)d %(funcName)s %(message)s",
                     handlers=[logging.StreamHandler()],
-                    level=logging.DEBUG if os.getenv("DJANGO_PROJECT_CREATOR_DEBUG", "False") == "True" else logging.INFO)
+                    level=logging.DEBUG)
 
 logger = logging.getLogger(__name__)
 
