@@ -248,6 +248,18 @@ ACCOUNT_USERNAME_VALIDATORS = None
         new_string = "{}\n\n{}".format(allauth_options, old_string)
         contents = contents.replace(old_string, new_string)
 
+        # Database
+        old_string = """    'default': {"""
+        new_string = """        'ENGINE': os.getenv("DB_ENGINE"),
+        'NAME': os.getenv("DB_NAME"),
+        'USER': os.getenv("DB_USER"),
+        'PASSWORD': os.getenv("DB_PASSWORD"),
+        'HOST': os.getenv("DB_HOST"),
+        'PORT': os.getenv("DB_PORT"),
+        """
+        new_string = "{}\n{}".format(old_string, new_string)
+        contents = contents.replace(old_string, new_string)
+
         with open(path, "w") as fh:
             fh.write(contents)
 
