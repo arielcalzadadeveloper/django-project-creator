@@ -308,7 +308,7 @@ BROWSER_WINDOW_TITLE = "Base project"
         with open(path, "r") as fh:
             contents = fh.read()
 
-        old_string = "import os"
+        old_string = "import sys"
         new_string = "{}\n\nimport dotenv".format(old_string)
         contents = contents.replace(old_string, new_string)
 
