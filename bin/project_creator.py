@@ -191,12 +191,15 @@ class ProjectCreator:
         new_string = "{}\n\n{}{}".format(old_string, "    " * 4, "'applications.common.context_processors.general',")
         contents = contents.replace(old_string, new_string)
 
-        """
-        'builtins': [
+        old_string = "WSGI_APPLICATION = 'conf.wsgi.application'"
+        new_builtins = """
+        TEMPLATES[0]["OPTIONS"]["builtins"] = [
             'django.templatetags.static',
             'crispy_forms.templatetags.crispy_forms_tags',
-        ],
+        ]
         """
+        new_string = "{}\n\n{}".format(new_builtins, old_string)
+        contents = contents.replace(old_string, new_string)
 
         with open(path, "w") as fh:
             fh.write(contents)
