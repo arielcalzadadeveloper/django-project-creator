@@ -167,20 +167,20 @@ class ProjectCreator:
 
         # Installed apps
         new_applications = [
-            'django.contrib.sites',
-            'django.contrib.humanize',
+            "'django.contrib.sites',",
+            "'django.contrib.humanize',",
             '',
-            'crispy_forms',
+            "'crispy_forms',",
             '',
-            'applications.common',
-            'applications.users',
+            "'applications.common',",
+            "'applications.users',",
             '',
-            'allauth',
-            'allauth.account',
-            'allauth.socialaccount',
-            'dynamic_raw_id',
+            "'allauth',",
+            "'allauth.account',",
+            "'allauth.socialaccount',",
+            "'dynamic_raw_id',",
             '',
-            'applications.last_app',
+            "'applications.last_app',",
         ]
         old_string = "'django.contrib.staticfiles'"
         new_string = "{}\n\n    {}".format(old_string, "\n    ".join(new_applications))
