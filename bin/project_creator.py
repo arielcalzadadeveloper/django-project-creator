@@ -257,7 +257,6 @@ ACCOUNT_USERNAME_VALIDATORS = None
         'HOST': os.getenv("DB_HOST"),
         'PORT': os.getenv("DB_PORT"),
         """
-        new_string = "{}\n{}".format(old_string, new_string)
         contents = contents.replace(old_string, new_string)
 
         old_string = """'ENGINE': 'django.db.backends.sqlite3',"""
