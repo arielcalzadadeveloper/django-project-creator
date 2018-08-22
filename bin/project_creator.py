@@ -162,7 +162,7 @@ class ProjectCreator:
 
         # Allowed hosts
         old_string = "ALLOWED_HOSTS = []"
-        new_string = "{}\nos.getenv('ALLOWED_HOSTS').split(',')".format(old_string)
+        new_string = "ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')".format(old_string)
         contents = contents.replace(old_string, new_string)
 
         # Installed apps
@@ -183,7 +183,7 @@ class ProjectCreator:
             'applications.last_app',
         ]
         old_string = "'django.contrib.staticfiles'"
-        new_string = "{}\n\n{}".format(old_string, "\n    ".join(new_applications))
+        new_string = "{}\n\n    {}".format(old_string, "\n    ".join(new_applications))
         contents = contents.replace(old_string, new_string)
 
         with open(path, "w") as fh:
