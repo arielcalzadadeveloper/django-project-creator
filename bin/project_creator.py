@@ -1,18 +1,11 @@
 #!/usr/bin/env python
 
 import argparse
-import logging
 import os
 import shutil
 import subprocess
 import sys
 import uuid
-
-logging.basicConfig(format="%(asctime)s %(levelname)s %(filename)s %(lineno)d %(funcName)s %(message)s",
-                    handlers=[logging.StreamHandler()],
-                    level=logging.DEBUG)
-
-logger = logging.getLogger(__name__)
 
 
 class ProjectCreator:
@@ -25,7 +18,7 @@ class ProjectCreator:
     @staticmethod
     def _run_command(command, with_subprocess=True):
         """Run shell command"""
-        logger.debug("Running: {}".format(command))
+        print("Running command: {}".format(" ".join(command)))
 
         if with_subprocess:
             try:
@@ -50,7 +43,6 @@ class ProjectCreator:
         self._run_command(command)
 
     def _get_base_project(self, location):
-        logger.info("Cloning base project")
         temporal_location = os.path.join(location, uuid.uuid4().hex)
 
         command = [
@@ -91,8 +83,6 @@ def main():
     args = parser.parse_args(sys.argv[1:])
     if not os.path.exists(args.location):
         os.makedirs(args.location)
-
-    logger.info("Creating project...")
 
     creator = ProjectCreator()
     creator.create(args.location)

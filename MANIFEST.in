@@ -6,4 +6,3 @@ prune .git
 prune .gitignore
 include LICENSE
 include README.md
-prune tests.py
