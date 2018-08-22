@@ -58,15 +58,15 @@ class ProjectCreator:
 
         self._run_command(command)
 
-        # command = [
-        #     "mv",
-        #     "-f",
-        #     os.path.join(temporal_location, "/"),
-        #     location
-        # ]
-        #
-        # self._run_command(command)
-        # shutil.rmtree(temporal_location)
+        command = [
+            "mv",
+            "-f",
+            "{}/*".format(temporal_location),
+            location
+        ]
+
+        self._run_command(command)
+        shutil.rmtree(temporal_location)
 
 
 def main():
