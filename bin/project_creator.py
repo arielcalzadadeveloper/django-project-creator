@@ -6,7 +6,6 @@ import os
 import shutil
 import subprocess
 import sys
-import tempfile
 import uuid
 
 logging.basicConfig(format="%(asctime)s %(levelname)s %(filename)s %(lineno)d %(funcName)s %(message)s",
@@ -59,15 +58,15 @@ class ProjectCreator:
 
         self._run_command(command)
 
-        command = [
-            "mv",
-            "-f",
-            os.path.join(temporal_location, "/"),
-            location
-        ]
-
-        self._run_command(command)
-        shutil.rmtree(temporal_location)
+        # command = [
+        #     "mv",
+        #     "-f",
+        #     os.path.join(temporal_location, "/"),
+        #     location
+        # ]
+        #
+        # self._run_command(command)
+        # shutil.rmtree(temporal_location)
 
 
 def main():
