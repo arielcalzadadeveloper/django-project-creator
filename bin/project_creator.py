@@ -13,17 +13,46 @@ logging.basicConfig(format="%(asctime)s %(levelname)s %(filename)s %(lineno)d %(
 logger = logging.getLogger(__name__)
 
 
-def run_command(command):
-    """Run command using subprocess module."""
-    try:
-        logger.debug("Running: {}".format(command))
-        command_line_process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        process_output, _ = command_line_process.communicate()
+class ProjectCreator:
+    BASE_PROJECT_URL = "git+https://github.com/arielcalzadadeveloper/django-base-project.git"
 
-        if command_line_process.returncode != 0:
-            raise Exception(process_output)
-    except Exception as e:
-        raise Exception(e)
+    def create(self, location):
+        self._create_project(location)
+        self._get_base_project(location)
+
+    @staticmethod
+    def _run_command(command):
+        """Run command using subprocess module."""
+        try:
+            logger.debug("Running: {}".format(command))
+            command_line_process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            process_output, _ = command_line_process.communicate()
+
+            if command_line_process.returncode != 0:
+                raise Exception(process_output)
+        except Exception as e:
+            raise Exception(e)
+
+    def _create_project(self, location):
+        command = [
+            "django-admin",
+            "startproject",
+            "conf",
+            location
+        ]
+
+        self._run_command(command)
+
+    def _get_base_project(self, location):
+        logger.info("Cloning base project")
+        command = [
+            "git",
+            "clone",
+            self.BASE_PROJECT_URL,
+            location
+        ]
+
+        self._run_command(command)
 
 
 def main():
@@ -34,14 +63,10 @@ def main():
     if not os.path.exists(args.location):
         os.makedirs(args.location)
 
-    command = [
-        "django-admin",
-        "startproject",
-        "conf",
-        args.location
-    ]
     logger.info("Creating project...")
-    run_command(command)
+
+    creator = ProjectCreator()
+    creator.create(args.location)
 
 
 if __name__ == "__main__":
