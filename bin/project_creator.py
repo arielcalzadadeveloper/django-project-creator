@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 
 class ProjectCreator:
-    BASE_PROJECT_URL = "git+https://github.com/arielcalzadadeveloper/django-base-project.git"
+    BASE_PROJECT_URL = "https://github.com/arielcalzadadeveloper/django-base-project.git"
 
     def create(self, location):
         self._create_project(location)
