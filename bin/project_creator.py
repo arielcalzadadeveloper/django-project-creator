@@ -261,6 +261,15 @@ ACCOUNT_USERNAME_VALIDATORS = None
         new_string = """'ENGINE': os.getenv("DB_ENGINE"),"""
         contents = contents.replace(old_string, new_string)
 
+        # Internationalization
+        old_string = """LANGUAGE_CODE = 'en-us'"""
+        new_string = """LANGUAGE_CODE = 'es-co'"""
+        contents = contents.replace(old_string, new_string)
+
+        old_string = """TIME_ZONE = 'UTC'"""
+        new_string = """TIME_ZONE = 'America/Bogota'"""
+        contents = contents.replace(old_string, new_string)
+
         with open(path, "w") as fh:
             fh.write(contents)
 
