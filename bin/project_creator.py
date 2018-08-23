@@ -171,7 +171,7 @@ class ProjectCreator:
 
         # Allowed hosts
         old_string = "ALLOWED_HOSTS = []"
-        new_string = "ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')".format(old_string)
+        new_string = "ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').replace(' ', '').split(',')".format(old_string)
         contents = contents.replace(old_string, new_string)
 
         # Installed apps
