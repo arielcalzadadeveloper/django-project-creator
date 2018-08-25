@@ -290,6 +290,33 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = '/base_project_media/'"""
         contents = contents.replace(old_string, new_string)
 
+        # Email
+        contents += """
+DEBUG_EMAIL = True if os.getenv("DEBUG_EMAIL") == "True" else False
+
+if DEBUG_EMAIL:
+    EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+    EMAIL_FILE_PATH = os.path.join(BASE_DIR, "temporal")
+else:
+    EMAIL_HOST = os.getenv("EMAIL_HOST")
+    EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+    EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+    SERVER_EMAIL = os.getenv("SERVER_EMAIL")
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+
+EMAIL_SUBJECT_PREFIX = "[Base project] "
+
+ADMINS =[
+    ('System Administrator', 'example@example.org'),
+]
+
+MANAGERS =[
+    ('System Administrator', 'example@example.org'),
+]
+        
+        """
+
         # Last sections
         contents += """
 # Allow thousand separator
@@ -301,6 +328,15 @@ CRISPY_FAIL_SILENTLY = not DEBUG
 
 # Browser window title
 BROWSER_WINDOW_TITLE = "Base project"
+
+# Messages framework
+MESSAGE_TAGS = {
+    message_constants.DEBUG: "debug",
+    message_constants.INFO: "info",
+    message_constants.SUCCESS: "success",
+    message_constants.WARNING: "warning",
+    message_constants.ERROR: "danger",
+}
 """
         with open(path, "w") as fh:
             fh.write(contents)
