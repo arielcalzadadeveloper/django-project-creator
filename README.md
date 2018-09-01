@@ -14,8 +14,3 @@ Simple command line script for creating Django Projects.
     project_creator.py /home/example/projects/myproject
     ```
     
-## Running tests
-
-    ```bash
-    python -m unittest discover -v -f
-    ```
