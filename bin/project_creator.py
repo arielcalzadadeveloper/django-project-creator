@@ -12,6 +12,7 @@ class ProjectCreator:
     BASE_PROJECT_URL = "https://github.com/arielcalzadadeveloper/django-base-project.git"
 
     def create(self, location):
+        """Run required steps to create and prepare a django base project."""
         self._create_project(location)
         self._get_base_project(location)
         self._setup_environment_file(location)
@@ -22,7 +23,7 @@ class ProjectCreator:
 
     @staticmethod
     def _run_command(command, with_subprocess=True):
-        """Run shell command"""
+        """Run shell command."""
         print("Running command: {}".format(" ".join(command)))
 
         if with_subprocess:
@@ -38,6 +39,7 @@ class ProjectCreator:
             os.system(" ".join(command))
 
     def _create_project(self, location):
+        """Execute django admin startproject command."""
         command = [
             "django-admin",
             "startproject",
@@ -48,6 +50,7 @@ class ProjectCreator:
         self._run_command(command)
 
     def _get_base_project(self, location):
+        """Clone django-base-project and clean unnecessary file."""
         temporal_location = os.path.join(location, uuid.uuid4().hex)
 
         command = [
@@ -81,7 +84,7 @@ class ProjectCreator:
         shutil.rmtree(temporal_location)
 
     def _setup_environment_file(self, location):
-        # Rename example file
+        """Rename example config file."""
         source = os.path.join(location, "env.example")
         target = os.path.join(location, ".env")
         command = ["mv", "-f", source, target]
